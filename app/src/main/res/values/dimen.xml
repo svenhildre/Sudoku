@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_large">45sp</dimen>
+    <dimen name="text_size_xlarge">55sp</dimen>
+    <dimen name="button_width">250dp</dimen>
+    <dimen name="button_height">60dp</dimen>
+    <dimen name="button_text_size">20sp</dimen>
+    <dimen name="button_margin_top">20dp</dimen>
+    <dimen name="switch_margin_top">16dp</dimen>
+    <dimen name="switch_margin_start">16dp</dimen>
+</resources>

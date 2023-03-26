@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/klasik"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/klasik"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toTopOf="@+id/yatay_1" />
+
+    <TextView
+        android:id="@+id/sudoku"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/sudoku"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textScaleX="1"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@id/klasik" />
+
+    <Button
+        android:id="@+id/continue_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:background="@drawable/button_border_devam"
+        android:backgroundTint="@color/pop_up"
+        android:text="Continue"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@id/sudoku" />
+
+    <Button
+        android:id="@+id/new_game_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:background="@drawable/button_border"
+        android:backgroundTint="@color/YeniOyun"
+        android:text="New Game"
+        android:textColor="@color/YeniOyunText"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintBottom_toBottomOf="@id/yatay_2"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@id/continue_button"
+        app:layout_constraintVertical_bias="0.00" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchcompat1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/switch_margin_top"
+        android:text="Switch"
+        app:layout_constraintStart_toStartOf="@+id/dikey_1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.70" />
+</androidx.constraintlayout.widget.ConstraintLayout>

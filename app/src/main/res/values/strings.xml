@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sudoku</string>
+    <string name="klasik">Klasik</string>
+    <string name="sudoku">Sudoku</string>
+</resources>
