@@ -1,45 +1,18 @@
 package com.example.sudoku;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.style.BackgroundColorSpan;
-import android.text.style.CharacterStyle;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.ReplacementSpan;
-import android.text.style.StrikethroughSpan;
-import android.text.style.TypefaceSpan;
-import android.text.style.UpdateAppearance;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.text.BreakIterator;
 
 public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "prefs";
@@ -72,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         sudokuTextView.setTypeface(typeface2);
 
 
-        SwitchCompat switchCompat = findViewById(R.id.switchcompat1);
+        SwitchCompat switchCompat = findViewById(R.id.mode_switch);
         switchCompat.setChecked(useDarkTheme);
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

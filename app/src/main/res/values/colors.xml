@@ -26,7 +26,7 @@
     <color name="colorSwitchTextOff">#000000</color>
     <color name="pop_up">#000000</color>
     <color name="kırmızı">#FF0F0F</color>
-    <color name="wtf">#FFFFFF</color>
+    <color name="pause_button_text">#4E4E4E</color>
     <color name="gri">#000000</color>
     <color name="button_border">#5599FF</color>
     <color name="top_text">#5599FF</color>
@@ -35,5 +35,7 @@
     <color name="nasil_oynanir_aciklama">#434343</color>
     <color name="buton_selected">#AACBFF</color>
     <color name="numbers">#005ECC</color>
+    <color name="pause_pop_up">#D1D1D1</color>
+    <color name="highlight">#D1D1D1</color>
 
 </resources>

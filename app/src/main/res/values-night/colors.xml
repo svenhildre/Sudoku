@@ -11,14 +11,16 @@
     <color name="colorSwitchTextOn">#FFC328</color>
     <color name="colorSwitchTextOff">#FFFFFF</color>
     <color name="pop_up">#FFC328</color>
-    <color name="wtf">#606982</color>
+    <color name="pause_button_text">#BDBDBD</color>
     <color name="gri">#929292</color>
     <color name="button_border">#FFFFFF</color>
     <color name="top_text">#797979</color>
     <color name="slide_renk_koyu">#FFC328</color>
     <color name="slide_renk_acik">#FFD772</color>
     <color name="nasil_oynanir_aciklama">#FFFFFF</color>
-    <color name="buton_selected">#434343</color>
+    <color name="buton_selected">#FFC738</color>
     <color name="numbers">#FFFFFF</color>
+    <color name="pause_pop_up">#525252</color>
+    <color name="highlight">#434343</color>
 
 </resources>
