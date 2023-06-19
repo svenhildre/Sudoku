@@ -51,21 +51,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/pause" />
 
-    <ImageButton
-        android:id="@+id/geri_al"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#00000000"
-        android:padding="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@id/yatay_4"
-        app:layout_constraintEnd_toEndOf="@id/dikey_2"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@id/dikey_1"
-        app:layout_constraintTop_toBottomOf="@+id/yatay_2"
-        app:layout_constraintVertical_bias="0.082"
-        app:srcCompat="@drawable/undo" />
-
     <TextView
         android:id="@+id/mistake_limit"
         android:layout_width="wrap_content"
@@ -99,22 +84,6 @@
         app:layout_constraintVertical_bias="0.611" />
 
     <TextView
-        android:id="@+id/undo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Undo"
-        android:textAlignment="center"
-        android:textColor="@color/top_text"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/yatay_4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/geri_al"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/zaman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,6 +98,61 @@
         app:layout_constraintTop_toTopOf="@+id/yatay_1"
         app:layout_constraintVertical_bias="1.0" />
 
+    <ImageButton
+        android:id="@+id/checkmark"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#00000000"
+        android:padding="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/yatay_4"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintHorizontal_bias="0.626"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@+id/yatay_2"
+        app:layout_constraintVertical_bias="0.077"
+        app:srcCompat="@drawable/checkmark"
+        app:tint="@color/icon" />
+
+    <ImageButton
+        android:id="@+id/erase"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#00000000"
+        android:padding="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/yatay_4"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@+id/yatay_2"
+        app:layout_constraintVertical_bias="0.083"
+        app:srcCompat="@drawable/erase"
+        app:tint="@color/icon" />
+
+    <TextView
+        android:id="@+id/eraseText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Erase"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/erase"
+        app:layout_constraintStart_toStartOf="@+id/erase"
+        app:layout_constraintTop_toBottomOf="@+id/erase" />
+
+    <TextView
+        android:id="@+id/CheckText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/checkmark"
+        app:layout_constraintStart_toStartOf="@+id/checkmark"
+        app:layout_constraintTop_toBottomOf="@+id/checkmark" />
     <FrameLayout
         android:id="@+id/Çerçeve"
         android:layout_width="0dp"
@@ -1523,21 +1547,22 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button1"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
         android:padding="0dp"
-        android:text="7"
+        android:text="1"
         android:textColor="@color/button_border"
         android:textSize="32sp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
-        app:layout_constraintEnd_toStartOf="@+id/button8"
-        app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@+id/eraseText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button9"
@@ -1545,16 +1570,16 @@
         android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
         android:padding="0dp"
         android:text="9"
         android:textColor="@color/button_border"
         android:textSize="32sp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
         app:layout_constraintEnd_toEndOf="@id/dikey_2"
         app:layout_constraintStart_toEndOf="@+id/button8"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintTop_toBottomOf="@+id/CheckText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button8"
@@ -1562,16 +1587,33 @@
         android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
         android:padding="0dp"
         android:text="8"
         android:textColor="@color/button_border"
         android:textSize="32sp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
         app:layout_constraintEnd_toStartOf="@+id/button9"
         app:layout_constraintStart_toEndOf="@+id/button7"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintTop_toBottomOf="@+id/CheckText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
+        android:padding="0dp"
+        android:text="7"
+        android:textColor="@color/button_border"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_4"
+        app:layout_constraintEnd_toStartOf="@+id/button8"
+        app:layout_constraintStart_toEndOf="@+id/button6"
+        app:layout_constraintTop_toBottomOf="@+id/CheckText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button5"
@@ -1579,16 +1621,16 @@
         android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
         android:padding="0dp"
         android:text="5"
         android:textColor="@color/button_border"
         android:textSize="32sp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
         app:layout_constraintEnd_toStartOf="@+id/button6"
         app:layout_constraintStart_toEndOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintTop_toBottomOf="@+id/eraseText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button4"
@@ -1596,16 +1638,16 @@
         android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
         android:padding="0dp"
         android:text="4"
         android:textColor="@color/button_border"
         android:textSize="32sp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
         app:layout_constraintEnd_toStartOf="@+id/button5"
         app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintTop_toBottomOf="@+id/eraseText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button3"
@@ -1613,16 +1655,16 @@
         android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
         android:padding="0dp"
         android:text="3"
         android:textColor="@color/button_border"
         android:textSize="32sp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintTop_toBottomOf="@+id/eraseText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button2"
@@ -1638,26 +1680,8 @@
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintStart_toEndOf="@+id/button1"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.716" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/button_border"
-        android:gravity="center_horizontal"
-        android:padding="0dp"
-        android:text="1"
-        android:textColor="@color/button_border"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/yatay_4"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@id/dikey_1"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintTop_toBottomOf="@+id/eraseText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button6"
@@ -1665,16 +1689,16 @@
         android:layout_height="70dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_border"
+        android:gravity="center_horizontal"
         android:padding="0dp"
         android:text="6"
         android:textColor="@color/button_border"
         android:textSize="32sp"
-        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/yatay_4"
         app:layout_constraintEnd_toStartOf="@+id/button7"
         app:layout_constraintStart_toEndOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/undo"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintTop_toBottomOf="@+id/CheckText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/dikey_2"

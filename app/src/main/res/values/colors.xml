@@ -37,5 +37,6 @@
     <color name="numbers">#005ECC</color>
     <color name="pause_pop_up">#D1D1D1</color>
     <color name="highlight">#D1D1D1</color>
+    <color name="icon">#7C7C7C</color>
 
 </resources>

@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Geleneksek Sudoku bulmacası, dokuz adet 3x3’lük kareden oluşan 9x9 bir bulmaca diyagramından meydana gelir. Sudoku bulmacasını tamamlamak için bir sayının; aynı sıra, sütun ya da 3x3 karenin yalnızca bir defa yazıldığından emin olmalısınız."
+        android:text="The traditional Sudoku puzzle consists of a 9x9 puzzle diagram consisting of nine 3x3 squares. A number to complete the Sudoku puzzle; you must make sure that the same row, column or 3x3 square is written only once."
         android:textColor="@color/koyu_gri"
         android:textSize="18sp"
         android:textStyle="bold"

@@ -106,17 +106,6 @@ public class Ayarlar extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 buttonView.setTextColor(isChecked ? textColorLight : textColorDark);
                 sharedPreferences.edit().putBoolean("switch4State", isChecked).apply();
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(Ayarlar.this);
-                builder.setMessage("Changes will apply after starting a new game!")
-                        .setPositiveButton("Tamam", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                                // Ekran kapansın ama yeni oyuna başlamasın
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
             }
         });
 

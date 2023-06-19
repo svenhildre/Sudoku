@@ -1,11 +1,16 @@
 package com.example.sudoku;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Outline;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -19,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,10 +47,13 @@ public class SudokuOyunActivity extends AppCompatActivity {
     private boolean isTimerRunning = false;
     private long startTime;
     private long elapsedTime;
+    private int mistakeCount = 0;
+    private TextView mistakeLimit;
     private boolean isPopupOpen = false; // popup ekranın açık/kapalı durumunu takip etmek için bir değişken oluşturuyoruz
 
     private ImageButton settingsButton;
     private ImageButton pauseButton;
+    private SudokuGameSaveManager gameSaveManager;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -54,6 +63,8 @@ public class SudokuOyunActivity extends AppCompatActivity {
         TextView difficultyTextView = findViewById(R.id.difficulty);
         timeCounter = findViewById(R.id.zaman);
         timer = new Timer();
+        mistakeLimit = findViewById(R.id.mistake_limit);
+        gameSaveManager = new SudokuGameSaveManager();
 
         // Get Difficulty level
         Intent intent = getIntent();
@@ -80,14 +91,41 @@ public class SudokuOyunActivity extends AppCompatActivity {
 
             }
         }
+        SharedPreferences sharedPreferences = getSharedPreferences("SwitchState", MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("switch5State", false)) {
+                mistakeLimit.setText("Mistakes: 0/3");
+                mistakeCount = 0;
+            } else {
+                mistakeLimit.setText("Mistakes: -/-");
+                mistakeCount = 3; // Mistake limit is disabled when switch is off, but mistake count is set to 3 initially to prevent any mistakes before switching on the limit
+            }
 
-        fillBoard(difficultyLevel);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("default", "Sudoku", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Sudoku notifications");
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        ImageButton erase = findViewById(R.id.erase);
+        erase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (selectedRow != -1 && selectedCol != -1) {
+                    cells[selectedRow][selectedCol].setText("");
+                    cells[selectedRow][selectedCol].setBackground(getResources().getDrawable(R.drawable.sudoku_border_cell));
+                }
+            }
+        });
+
 
         pauseButton = findViewById(R.id.pause);
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pauseTimer();
+                saveSudokuGame();
                 AlertDialog.Builder builder = new AlertDialog.Builder(SudokuOyunActivity.this);
                 View view = getLayoutInflater().inflate(R.layout.pause_pop_up, null);
                 builder.setView(view);
@@ -107,7 +145,11 @@ public class SudokuOyunActivity extends AppCompatActivity {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
                         isPopupOpen = false;
+                        if (sharedPreferences.getBoolean("switch4State", false)) {
                             startTimer();
+                        } else {
+                            timeCounter.setText("--:--");
+                        }
                     }
                 });
             }
@@ -118,9 +160,42 @@ public class SudokuOyunActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent ayarlarIntent = new Intent(SudokuOyunActivity.this, Ayarlar.class);
+                saveSudokuGame();
                 startActivity(ayarlarIntent);
             }
         });
+        ImageButton checkWinButton = findViewById(R.id.checkmark);
+        checkWinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkWin()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SudokuOyunActivity.this);
+                    builder.setMessage("Congratulations, you won!");
+                    builder.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            fillBoard(difficultyLevel); // Start a new game with the same difficulty level
+                        }
+                    });
+                    builder.setNegativeButton("Main Menu", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(SudokuOyunActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    int remainingCount = countRemainingCells();
+                    Toast.makeText(getApplicationContext(), "Not a valid solution yet. Remaining cells: " + remainingCount, Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+        });
+
 
         ImageButton backButton = findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +207,7 @@ public class SudokuOyunActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(SudokuOyunActivity.this, MainActivity.class);
+                        saveSudokuGame();
                         startActivity(intent);
                         finish();
                     }
@@ -163,7 +239,10 @@ public class SudokuOyunActivity extends AppCompatActivity {
                         cells[selectedRow][selectedCol].setTextColor(getResources().getColor(R.color.numbers));
                     } else {
                         cells[selectedRow][selectedCol].setTextColor(Color.RED);
+                        makeMistake();
                     }
+                    updateRemainingCounts(); // Update remaining counts after placing a number
+                    saveSudokuGame();
                     if (checkWin()) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(SudokuOyunActivity.this);
                         builder.setMessage("Congratulations, you won!");
@@ -184,12 +263,12 @@ public class SudokuOyunActivity extends AppCompatActivity {
                         AlertDialog dialog = builder.create();
                         dialog.show();
                     }
+                    updateRemainingCounts();
                 }
             });
         }
 
-        // SharedPreferences nesnesi oluşturuluyor
-        SharedPreferences sharedPreferences = getSharedPreferences("SwitchState", MODE_PRIVATE);
+
         // Set OnTouchListener to all cells
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -264,16 +343,74 @@ public class SudokuOyunActivity extends AppCompatActivity {
                                 }
                             }
                         }
+                        updateRemainingCounts(); // Update remaining counts after selecting a cell
                         return true;
                     }
                 });
             }
         }
+
         boolean switch4State = sharedPreferences.getBoolean("switch4State", false);
         if (switch4State) {
             startTimer();
         } else {
             timeCounter.setText("--:--");
+        }
+        loadSudokuGame();
+
+    }
+    private void loadSudokuGame() {
+        SudokuGameLoadResult loadResult = gameSaveManager.loadSudokuGame(this);
+        if (loadResult.isGameLoaded()) {
+            sudokuBoard = loadResult.getSudokuBoard();
+            solvedSudokuBoard = loadResult.getSolvedSudokuBoard();
+            difficultyLevel = loadResult.getDifficultyLevel();
+        } else {
+            fillBoard(difficultyLevel);
+        }
+
+        SudokuUIManager uiManager = new SudokuUIManager(this, cells);
+        uiManager.displayBoard(sudokuBoard, solvedSudokuBoard);
+    }
+
+    public void saveSudokuGame() {
+        SudokuUIManager uiManager = new SudokuUIManager(this, cells);
+        sudokuBoard = uiManager.getBoardState();
+        gameSaveManager.saveSudokuGame(this, sudokuBoard, solvedSudokuBoard, difficultyLevel);
+    }
+    private void makeMistake() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SwitchState", MODE_PRIVATE);
+        mistakeCount += 1;
+        if (sharedPreferences.getBoolean("switch5State", false)) {
+            if (mistakeCount >= 3) {
+                gameSaveManager.deleteSavedSudokuGame(SudokuOyunActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SudokuOyunActivity.this);
+                builder.setMessage("Game over. You made too many mistakes.")
+                        .setCancelable(false)
+                        .setPositiveButton("New Game", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                gameSaveManager.deleteSavedSudokuGame(SudokuOyunActivity.this);
+                                fillBoard(difficultyLevel);
+                                mistakeLimit.setText("Mistakes: 0/3");
+                                mistakeCount = 0;
+                            }
+                        })
+                        .setNegativeButton("Main Menu", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(SudokuOyunActivity.this, MainActivity.class);
+                                gameSaveManager.deleteSavedSudokuGame(SudokuOyunActivity.this);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else {
+                mistakeLimit.setText("Mistakes: " + mistakeCount + "/3");
+            }
+        } else {
+            mistakeLimit.setText("Mistakes: -/-");
         }
     }
     private void startTimer() {
@@ -300,7 +437,7 @@ public class SudokuOyunActivity extends AppCompatActivity {
     private void pauseTimer() {
         if (isTimerRunning) {
             timer.cancel();
-            isTimerRunning = false;
+            isTimerRunning = true;
         }
     }
     private void updateTimerText() {
@@ -308,16 +445,6 @@ public class SudokuOyunActivity extends AppCompatActivity {
         int seconds = (int) (elapsedTime / 1000) % 60;
         String timeString = String.format("%02d:%02d", minutes, seconds);
         timeCounter.setText(timeString);
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        pauseTimer();
-    }
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        startTimer();
     }
     private boolean checkWin() {
         for (int i = 0; i < 9; i++) {
@@ -334,60 +461,31 @@ public class SudokuOyunActivity extends AppCompatActivity {
         }
         return true; // If all cells are filled correctly, it's a win
     }
-    private boolean solveSudoku(int row, int col) {
-        if (row == 9) { // tahtanın sonuna ulaştıysak Sudoku çözülmüş demektir
-            return true;
-        }
-        if (col == 9) { // satır tamamlandı, sıradaki satıra geç
-            return solveSudoku(row + 1, 0);
-        }
-        if (sudokuBoard[row][col] != 0) { // bu hücre zaten dolu, sıradaki hücreye geç
-            return solveSudoku(row, col + 1);
-        }
-        List<Integer> choices = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) { // bu hücreye yerleştirilebilecek sayıları bul
-            if (isValid(row, col, i)) {
-                choices.add(i);
-            }
-        }
-        if (choices.isEmpty()) { // bu hücreye yerleştirilebilecek hiçbir sayı yok
-            return false;
-        }
-        Collections.shuffle(choices); // seçenekleri karıştır
-        for (int choice : choices) { // seçenekleri dene
-            sudokuBoard[row][col] = choice;
-            if (solveSudoku(row, col + 1)) {
-                return true;
-            }
-        }
-        sudokuBoard[row][col] = 0; // hiçbir seçenek işe yaramadı, bu hücreyi boşalt
-        return false;
-    }
-    private boolean isValid(int row, int col, int value) {
-        for (int i = 0; i < 9; i++) { // aynı sütundaki sayılarla çakışıp çakışmadığını kontrol et
-            if (sudokuBoard[i][col] == value) {
-                return false;
-            }
-        }
-        for (int j = 0; j < 9; j++) { // aynı satırdaki sayılarla çakışıp çakışmadığını kontrol et
-            if (sudokuBoard[row][j] == value) {
-                return false;
-            }
-        }
-        int boxRow = (row / 3) * 3;
-        int boxCol = (col / 3) * 3;
-        for (int i = boxRow; i < boxRow + 3; i++) { // aynı kutudaki sayılarla çakışıp çakışmadığını kontrol et
-            for (int j = boxCol; j < boxCol + 3; j++) {
-                if (sudokuBoard[i][j] == value) {
-                    return false;
+    private int countRemainingCells() {
+        int remainingCount = 0;
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                String cellText = cells[i][j].getText().toString().trim();
+                if (cellText.isEmpty() || !TextUtils.isDigitsOnly(cellText)) {
+                    remainingCount++;
+                } else {
+                    int cellValue = Integer.parseInt(cellText);
+                    if (cellValue != solvedSudokuBoard[i][j]) {
+                        remainingCount++;
+                    }
                 }
             }
         }
-        return true;
+
+        return remainingCount;
     }
+
+
+
     private void fillBoard(int difficultyLevel) {
-        // create a complete Sudoku board
-        solveSudoku(0, 0);
+        SudokuSolver solver = new SudokuSolver();
+        sudokuBoard = solver.generateSudoku(difficultyLevel);
 
         solvedSudokuBoard = new int[9][9];
         for (int i = 0; i < 9; i++) {
@@ -395,7 +493,7 @@ public class SudokuOyunActivity extends AppCompatActivity {
                 solvedSudokuBoard[i][j] = sudokuBoard[i][j];
             }
         }
-        // remove cells to make it solvable and playable
+
         int cellsToRemove = 0;
         if (difficultyLevel == 1) {
             cellsToRemove = 45; // easy difficulty, 45 cells removed
@@ -405,28 +503,63 @@ public class SudokuOyunActivity extends AppCompatActivity {
             cellsToRemove = 55; // hard difficulty, 55 cells removed
         }
 
-        Random random = new Random();
-        while (cellsToRemove > 0) {
-            int row = random.nextInt(9);
-            int col = random.nextInt(9);
-            if (sudokuBoard[row][col] != 0) {
-                sudokuBoard[row][col] = 0;
-                cellsToRemove--;
-            }
-        }
-        // display the board on the screen
+        SudokuGenerator generator = new SudokuGenerator();
+        sudokuBoard = generator.generatePlayableSudoku(sudokuBoard, cellsToRemove);
+
+        SudokuUIManager uiManager = new SudokuUIManager(this, cells);
+        uiManager.displayBoard(sudokuBoard, solvedSudokuBoard);
+    }
+
+    private void updateRemainingCounts() {
+        TextView[] remainingTextViews = new TextView[9];
+        remainingTextViews[0] = findViewById(R.id.kalan_rakam_1);
+        remainingTextViews[1] = findViewById(R.id.kalan_rakam_2);
+        remainingTextViews[2] = findViewById(R.id.kalan_rakam_3);
+        remainingTextViews[3] = findViewById(R.id.kalan_rakam_4);
+        remainingTextViews[4] = findViewById(R.id.kalan_rakam_5);
+        remainingTextViews[5] = findViewById(R.id.kalan_rakam_6);
+        remainingTextViews[6] = findViewById(R.id.kalan_rakam_7);
+        remainingTextViews[7] = findViewById(R.id.kalan_rakam_8);
+        remainingTextViews[8] = findViewById(R.id.kalan_rakam_9);
+
+        int[] remainingCounts = new int[9];
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (sudokuBoard[i][j] != 0) {
-                    cells[i][j].setText(String.valueOf(sudokuBoard[i][j]));
-                    cells[i][j].setEnabled(false);
-                    cells[i][j].setTextColor(getResources().getColor(R.color.pop_up));
-                } else {
-                    cells[i][j].setText("");
-                    cells[i][j].setEnabled(true);
-                    cells[i][j].setTextColor(getResources().getColor(R.color.pop_up));
+                int value = sudokuBoard[i][j];
+                if (value >= 1 && value <= 9) {
+                    remainingCounts[value - 1]++;
                 }
             }
+        }
+
+        SharedPreferences sharedPreferences = getSharedPreferences("SwitchState", MODE_PRIVATE);
+        boolean switch7State = sharedPreferences.getBoolean("switch7State", true);
+
+        for (int i = 0; i < 9; i++) {
+            int remainingCount = 9 - remainingCounts[i];
+            TextView textView = remainingTextViews[i];
+            textView.setVisibility(switch7State ? View.VISIBLE : View.GONE);
+            textView.setText(String.valueOf(remainingCount));
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveSudokuGame();
+        pauseTimer();
+    }
+    @Override
+    protected void onRestart() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SwitchState", MODE_PRIVATE);
+        super.onRestart();
+        saveSudokuGame();
+        updateRemainingCounts();
+        if (sharedPreferences.getBoolean("switch4State", false)) {
+            startTimer();
+        } else {
+            timeCounter.setText("--:--");
         }
     }
     @Override
@@ -437,6 +570,7 @@ public class SudokuOyunActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(SudokuOyunActivity.this, MainActivity.class);
+                saveSudokuGame();
                 startActivity(intent);
                 finish();
             }

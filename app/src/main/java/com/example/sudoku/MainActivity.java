@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "prefs";
     private static final String PREF_DARK_THEME = "dark_theme";
     private boolean useDarkTheme;
+    private Button settingsButton,continueButton;
+    private SudokuGameSaveManager gameSaveManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        gameSaveManager = new SudokuGameSaveManager();
 
         int mavi = 0xFF5599FF;
 
@@ -60,6 +63,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        settingsButton = findViewById(R.id.settings);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ayarlarIntent = new Intent(MainActivity.this, Ayarlar.class);
+                startActivity(ayarlarIntent);
+            }
+        });
+
+        continueButton = findViewById(R.id.continue_button);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SudokuGameLoadResult loadResult = gameSaveManager.loadSudokuGame(MainActivity.this);
+                if (loadResult.isGameLoaded()) {
+                    Intent intent = new Intent(MainActivity.this, SudokuOyunActivity.class);
+                    intent.putExtra("level", getDifficultyLevelString(loadResult.getDifficultyLevel()));
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MainActivity.this, "No saved game found!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
         Button newGame = findViewById(R.id.new_game_button);
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
                         String level = "Easy";
                         Intent intent = new Intent(MainActivity.this, SudokuOyunActivity.class);
                         intent.putExtra("level", level);
+                        gameSaveManager.deleteSavedSudokuGame(MainActivity.this);
                         startActivity(intent);
                         finish();
-
                         dialog.dismiss(); // Popup'ı kapat
                     }
                 });
@@ -92,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                         String level = "Medium";
                         Intent intent = new Intent(MainActivity.this, SudokuOyunActivity.class);
                         intent.putExtra("level", level);
+                        gameSaveManager.deleteSavedSudokuGame(MainActivity.this);
                         startActivity(intent);
                         finish();
 
@@ -106,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         String level = "Hard";
                         Intent intent = new Intent(MainActivity.this, SudokuOyunActivity.class);
                         intent.putExtra("level", level);
+                        gameSaveManager.deleteSavedSudokuGame(MainActivity.this);
                         startActivity(intent);
                         finish();
 
@@ -120,5 +150,15 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(PREF_DARK_THEME, darkTheme);
         editor.apply();
+    }
+    private String getDifficultyLevelString(int difficultyLevel) {
+        if (difficultyLevel == 1) {
+            return "Easy";
+        } else if (difficultyLevel == 2) {
+            return "Medium";
+        } else if (difficultyLevel == 3) {
+            return "Hard";
+        }
+        return "";
     }
 }
