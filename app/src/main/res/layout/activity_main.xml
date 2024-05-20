@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/klasik"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/klasik"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toTopOf="@+id/yatay_1" />
+
+    <TextView
+        android:id="@+id/sudoku"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/sudoku"
+        android:textScaleX="1"
+        android:textSize="@dimen/text_size_xlarge"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@id/klasik" />
+
+    <Button
+        android:id="@+id/continue_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:background="@drawable/button_border"
+        android:backgroundTint="@color/YeniOyun"
+        android:text="CONTINUE"
+        android:textColor="@color/YeniOyunText"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@id/sudoku" />
+
+    <Button
+        android:id="@+id/new_game_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_border_devam"
+        android:backgroundTint="@color/pop_up"
+        android:text="New Game"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/dikey_2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@+id/continue_button" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:background="@drawable/button_border_devam"
+        android:backgroundTint="@color/pop_up"
+        android:text="SETTINGS"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_2"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@id/new_game_button"
+        app:layout_constraintVertical_bias="0.00" />
+
+    <Button
+        android:id="@+id/leaderboard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:background="@drawable/button_border_devam"
+        android:backgroundTint="@color/pop_up"
+        android:text="LEADERBOARD"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_2"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toBottomOf="@id/settings"
+        app:layout_constraintVertical_bias="0.00" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/mode_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_1"
+        app:layout_constraintEnd_toStartOf="@+id/dikey_2"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/dikey_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.353" />
+
+    <ImageView
+        android:id="@+id/Sun"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_1"
+        app:layout_constraintEnd_toStartOf="@+id/mode_switch"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/dikey_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36"
+        app:srcCompat="@drawable/sun1"
+        app:tint="@color/YeniOyunText" />
+
+    <ImageView
+        android:id="@+id/Moon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_1"
+        app:layout_constraintEnd_toStartOf="@+id/dikey_2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/mode_switch"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36"
+        app:srcCompat="@drawable/moon"
+        app:tint="@color/pop_up" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

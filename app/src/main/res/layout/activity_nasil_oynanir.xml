@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/dikey_4"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/yatay_2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView1"
+        app:layout_constraintStart_toStartOf="@id/dikey_3"
+        app:layout_constraintTop_toTopOf="@+id/yatay_2" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/yatay_2"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toTopOf="@id/yatay_1" />
+
+    <ImageButton
+        android:id="@+id/btnNext"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/slide_renk_koyu"
+        android:padding="15dp"
+        android:scaleType="centerCrop"
+        android:scaleX="-1"
+        android:background="@drawable/button_border_nasilo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dikey_2"
+        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintStart_toStartOf="@+id/dikey_4"
+        app:layout_constraintTop_toTopOf="@+id/yatay_2"
+        app:srcCompat="@drawable/geri"
+        app:tint="@color/YeniOyun" />
+
+    <Button
+        android:id="@+id/btnSkip"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_atla"
+        android:padding="1dp"
+        android:text="Skip"
+        android:textColor="@color/YeniOyun"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_1"
+        app:layout_constraintEnd_toStartOf="@+id/dikey_2"
+        app:layout_constraintStart_toStartOf="@+id/dikey_4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

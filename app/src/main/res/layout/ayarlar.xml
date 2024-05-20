@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageButton
+        android:id="@+id/back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#00000000"
+        android:scaleType="centerCrop"
+        android:padding="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_1"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29"
+        app:srcCompat="@drawable/geri" />
+
+    <TextView
+        android:id="@+id/ayarlar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Settings"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/yatay_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.305" />
+
+    <View
+        android:id="@+id/how_to_play_square"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/nasil_oynanir_diktortgen"
+        app:layout_constraintEnd_toEndOf="@id/dikey_2"
+        app:layout_constraintStart_toStartOf="@id/dikey_1"
+        app:layout_constraintTop_toTopOf="@+id/yatay_1" />
+
+    <ImageView
+        android:id="@+id/how_to_play_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintBottom_toBottomOf="@+id/how_to_play_square"
+        app:layout_constraintEnd_toEndOf="@+id/how_to_play_square"
+        app:layout_constraintStart_toStartOf="@+id/how_to_play_square"
+        app:layout_constraintTop_toTopOf="@+id/how_to_play_square"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/how_to" />
+
+    <TextView
+        android:id="@+id/how_to_play"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="How To Play"
+        android:textColor="@color/Nasıl_Oynanır"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/how_to_play_square"
+        app:layout_constraintEnd_toStartOf="@+id/forward"
+        app:layout_constraintStart_toEndOf="@+id/how_to_play_icon"
+        app:layout_constraintTop_toTopOf="@+id/how_to_play_square"
+        app:layout_constraintVertical_bias="0.461" />
+
+    <ImageButton
+        android:id="@+id/forward"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/Üst_Kare"
+        android:scaleType="centerCrop"
+        android:scaleX="-1"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/how_to_play_square"
+        app:layout_constraintEnd_toEndOf="@+id/dikey_2"
+        app:layout_constraintTop_toTopOf="@+id/how_to_play_square"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/geri" />
+
+    <View
+            android:id="@+id/ana_kare"
+            android:layout_width="0dp"
+            android:layout_height="143dp"
+            android:layout_marginTop="36dp"
+            android:background="@drawable/ayarlar_diktortgen"
+            app:layout_constraintEnd_toEndOf="@id/dikey_2"
+            app:layout_constraintStart_toStartOf="@id/dikey_1"
+            app:layout_constraintTop_toBottomOf="@+id/how_to_play_square" />
+
+        <Switch
+            android:id="@+id/sound_effects"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:switchMinWidth="65dp"
+            android:switchPadding="16dp"
+            android:text="Sound Effects"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:thumbTextPadding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/vibration"
+            app:layout_constraintEnd_toEndOf="@+id/ana_kare"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/sound_effects_icon"
+            app:layout_constraintTop_toTopOf="@+id/ana_kare"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <ImageView
+            android:id="@+id/sound_effects_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ana_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ana_kare"
+            app:layout_constraintHorizontal_bias="0.053"
+            app:layout_constraintStart_toStartOf="@+id/ana_kare"
+            app:layout_constraintTop_toTopOf="@+id/ana_kare"
+            app:layout_constraintVertical_bias="0.115"
+            app:srcCompat="@drawable/ses_efekti" />
+
+    <Switch
+        android:id="@+id/vibration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:switchMinWidth="65dp"
+        android:switchPadding="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Vibration"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ana_kare"
+        app:layout_constraintEnd_toStartOf="@+id/dikey_2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/vibration_icon"
+        app:layout_constraintTop_toTopOf="@+id/ana_kare"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <ImageView
+            android:id="@+id/vibration_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ana_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ana_kare"
+            app:layout_constraintHorizontal_bias="0.053"
+            app:layout_constraintStart_toStartOf="@+id/ana_kare"
+            app:layout_constraintTop_toTopOf="@+id/ana_kare"
+            app:layout_constraintVertical_bias="0.486"
+            app:srcCompat="@drawable/titresim" />
+
+    <Switch
+        android:id="@+id/notification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:switchMinWidth="65dp"
+        android:switchPadding="16dp"
+        android:text="Notifications"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ana_kare"
+        app:layout_constraintEnd_toEndOf="@+id/ana_kare"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/notification_icon"
+        app:layout_constraintTop_toBottomOf="@+id/vibration"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <ImageView
+        android:id="@+id/notification_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ana_kare"
+        app:layout_constraintEnd_toEndOf="@+id/ana_kare"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="@+id/ana_kare"
+        app:layout_constraintTop_toTopOf="@+id/ana_kare"
+        app:layout_constraintVertical_bias="0.884"
+        app:srcCompat="@drawable/bildirim" />
+
+    <View
+            android:id="@+id/ikinci_kare"
+            android:layout_width="0dp"
+            android:layout_height="195dp"
+            android:background="@drawable/ayarlar_diktortgen"
+            app:layout_constraintBottom_toBottomOf="@id/yatay_2"
+            app:layout_constraintEnd_toEndOf="@id/dikey_2"
+            app:layout_constraintStart_toStartOf="@id/dikey_1"
+            app:layout_constraintTop_toBottomOf="@+id/ana_kare"
+            app:layout_constraintVertical_bias="0.181" />
+
+        <Switch
+            android:id="@+id/time_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:switchMinWidth="65dp"
+            android:switchPadding="16dp"
+            android:text="Timer"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/time_icon"
+            app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+            app:layout_constraintVertical_bias="0.107"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <ImageView
+            android:id="@+id/time_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="@+id/ikinci_kare"
+            app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+            app:layout_constraintVertical_bias="0.09"
+            app:srcCompat="@drawable/time" />
+
+        <Switch
+            android:id="@+id/mistake_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:switchMinWidth="65dp"
+            android:switchPadding="16dp"
+            android:text="Mistake Limit"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/mistake_icon"
+            app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+            app:layout_constraintVertical_bias="0.375"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <ImageView
+            android:id="@+id/mistake_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="@+id/ikinci_kare"
+            app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+            app:layout_constraintVertical_bias="0.402"
+            app:srcCompat="@drawable/hata_limiti" />
+
+    <Switch
+        android:id="@+id/highlight_areas_switch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:switchMinWidth="65dp"
+        android:switchPadding="16dp"
+        android:text="Highlight Areas"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+        app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/highlight_areas_icon"
+        app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+        app:layout_constraintVertical_bias="0.71"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <ImageView
+            android:id="@+id/highlight_areas_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="@+id/ikinci_kare"
+            app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+            app:layout_constraintVertical_bias="0.636"
+            app:srcCompat="@drawable/tile_effect" />
+
+        <Switch
+            android:id="@+id/number_left_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:switchMinWidth="65dp"
+            android:switchPadding="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Number Count"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/number_left_icon"
+            app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+            app:layout_constraintVertical_bias="0.904"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <ImageView
+            android:id="@+id/number_left_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ikinci_kare"
+            app:layout_constraintEnd_toEndOf="@+id/ikinci_kare"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="@+id/ikinci_kare"
+            app:layout_constraintTop_toTopOf="@+id/ikinci_kare"
+            app:layout_constraintVertical_bias="0.903"
+            app:srcCompat="@drawable/kalan_numara" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dikey_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/yatay_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.90" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

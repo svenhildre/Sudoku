@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:gravity="center"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text=" Choose Difficulty: "
+        android:textColor="@color/pop_up"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnEasy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btnEasy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="EASY"
+        android:textSize="17sp"
+        android:background="@drawable/button_border_devam"
+        app:layout_constraintBottom_toTopOf="@+id/btnMedium"
+        app:layout_constraintEnd_toEndOf="@+id/btnMedium"
+        app:layout_constraintStart_toStartOf="@+id/btnMedium"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/btnMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="MEDIUM"
+        android:textSize="17sp"
+        android:background="@drawable/button_border_devam"
+        app:layout_constraintBottom_toTopOf="@+id/btnHard"
+        app:layout_constraintEnd_toEndOf="@+id/btnHard"
+        app:layout_constraintStart_toStartOf="@+id/btnHard"
+        app:layout_constraintTop_toBottomOf="@+id/btnEasy" />
+
+    <Button
+        android:id="@+id/btnHard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="HARD"
+        android:textSize="17sp"
+        android:background="@drawable/button_border_devam"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/btnMedium" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
